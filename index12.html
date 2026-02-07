@@ -1,420 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Business App - Login</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Job Platform</title>
 
 <style>
-    :root{
-  --bg-color: #0f172a;
-  --container-bg: #111827;
-  --text-color: white;
-  --input-bg: #1f2933;
-  --button-shadow: rgba(0,255,255,0.8);
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --primary:#2563eb;
+  --border:#e5e7eb;
 }
+*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text)}
 
-body{
-  background: var(--bg-color);
-  color: var(--text-color);
-  transition: all 0.5s ease;
-}
-
-.container{
-  background: var(--container-bg);
-  transition: all 0.5s ease;
-  box-shadow:0 0 20px var(--button-shadow);
-}
-
-input, select, textarea{
-  background: var(--input-bg);
-  color: var(--text-color);
-  transition: all 0.5s ease;
-}
-
-button{
-  transition: all 0.5s ease;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, sans-serif;
-}
-
-body{
-  height:100vh;
+/* Navbar */
+nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
-  background: linear-gradient(270deg, #ff0000, #00ffcc, #6a00ff, #ff9900);
-  background-size: 800% 800%;
-  animation: rgbBG 10s ease infinite;
-  color:white;
-  font-family: Arial, sans-serif;
+  position:sticky;
+  top:0;
 }
-
-/* CONTAINER */
-.container{
-  width:350px;
-  background:#111827;
-  padding:25px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 0 20px rgba(0,0,0,0.5);
-  .container{
-  box-shadow: 0 0 20px rgba(0,255,255,0.6);
-}
-
-}
-
-.hidden{display:none;}
-
-h2{margin-bottom:15px;}
-
-input, select, button{
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
+nav h1{margin:0;font-size:20px;color:var(--primary)}
+nav button{
+  background:none;
   border:none;
-
-}input, select, textarea{
-  border:2px solid transparent;
-  background-clip:padding-box;
-}
-
-input:focus{
-  outline:none;
-  border-image: linear-gradient(270deg,#ff0000,#00ffcc,#6a00ff,#ff9900) 1;
-}
-
-
-input, select{
-  background:#1f2933;
-  color:white;
-}
-
-
-button{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-  color:white;
+  font-size:15px;
+  margin-left:14px;
   cursor:pointer;
-  background: linear-gradient(270deg,#ff0000,#00ffcc,#6a00ff,#ff9900);
-  background-size:600% 600%;
-  animation: rgbButton 5s ease infinite;
-  box-shadow:0 0 10px rgba(0,255,255,0.8);
+  color:var(--muted);
 }
+nav button:hover{color:var(--primary)}
 
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(255,255,255,1);
-}
+.container{max-width:900px;margin:auto;padding:20px}
 
-button:hover{
-  background:#4f46e5;
-}
+/* Pages */
+.page{display:none}
+.page.active{display:block}
 
-.link{
-  margin-top:10px;
-  color:#93c5fd;
-  cursor:pointer;
-}
-
-/* HOME */
+/* Cards */
 .card{
-  background:#1f2933;
-  padding:15px;
-  margin-top:10px;
-  border-radius:8px;
+  background:var(--card);
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
+  margin-bottom:20px;
 }
-textarea{
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  border-radius:6px;
-  border:none;
-  background:#1f2933;
+
+/* Profile */
+.cover{
+  height:180px;
+  background:linear-gradient(135deg,#2563eb,#1e40af);
+  border-radius:14px;
+}
+.profile-card{margin-top:-60px}
+.avatar{
+  width:120px;height:120px;
+  border-radius:50%;
+  background:#ddd;
+  border:4px solid white;
+  margin-top:-80px;
+}
+.profile-top{
+  display:flex;
+  gap:20px;
+}
+.profile-info p{color:var(--muted);margin:6px 0}
+.badge{
+  background:#dcfce7;
+  color:#166534;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+}
+.actions button{
+  padding:10px 16px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:white;
+  margin-right:8px;
+  cursor:pointer;
+}
+.actions .primary{
+  background:var(--primary);
   color:white;
+  border:none;
 }
 
-.jobCard{
-  background:#1f2933;
-  padding:12px;
-  margin-top:10px;
-  border-radius:8px;
-}
-@keyframes rgbBG{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+.skills{display:flex;gap:10px;flex-wrap:wrap}
+.skill{background:#f1f5f9;padding:8px 12px;border-radius:999px;font-size:14px}
 
-@keyframes rgbButton{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
+.exp{border-left:3px solid var(--primary);padding-left:14px;margin-bottom:14px}
 
+@media(max-width:600px){
+  .profile-top{flex-direction:column;align-items:center;text-align:center}
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div class="container" id="loginBox">
-  <h2>Hamara Market</h2>
-  <input type="email" id="loginEmail" placeholder="Email">
-  <input type="password" id="loginPassword" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p class="link" onclick="showSignup()">Create Account</p>
-</div>
+<nav>
+  <h1>HamaraMarket</h1>
+  <div>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('jobs')">Jobs</button>
+    <button onclick="showPage('chat')">Chat</button>
+    <button onclick="showPage('profile')">Profile</button>
+  </div>
+</nav>
 
-<!-- SIGNUP -->
-<div class="container hidden" id="signupBox">
-  <h2>Sign Up</h2>
-  <input type="text" id="name" placeholder="Full Name">
-  <input type="email" id="signupEmail" placeholder="Email">
-  <input type="password" id="signupPassword" placeholder="Password">
+<div class="container">
 
-  <select id="language">
-    <option value="">Select Language</option>
-    <option>English</option>
-    <option>Hindi</option>
-  </select>
-
-  <select id="userType">
-    <option value="">I am</option>
-    <option>Employer</option>
-    <option>Worker</option>
-  </select>
-
-  <button onclick="signup()">Register</button>
-  <p class="link" onclick="showLogin()">Already have account?</p>
-</div>
-
-<!-- HOME -->
-<!-- HOME -->
-<div class="container hidden" id="homeBox">
-  <h2>Business App</h2>
-  <p id="userInfo"></p>
-
-  <!-- EMPLOYER PANEL -->
-  <div id="employerPanel" class="hidden">
-    <h3>Post a Job</h3>
-
-    <input type="text" id="jobTitle" placeholder="Job Title">
-    <input type="text" id="jobLocation" placeholder="Location">
-    <input type="text" id="jobSalary" placeholder="Salary">
-    <textarea id="jobDesc" placeholder="Job Description"></textarea>
-<h3>Applications</h3>
-<div id="applicationList"></div>
-<button onclick="loadApplications()">View Applications</button>
-
-    <button onclick="postJob()">Post Job</button>
+  <!-- HOME -->
+  <div id="home" class="page active">
+    <div class="card">
+      <h2>Welcome to HamaraMarket</h2>
+      <p>A professional job hiring platform for workers and employers.</p>
+    </div>
   </div>
 
-  <!-- WORKER PANEL -->
-  <div id="workerPanel" class="hidden">
-    <h3>Available Jobs</h3>
-    <div id="jobList"></div>
-    <h3>Search Jobs</h3>
-<input type="text" id="jobSearch" placeholder="Search by title or location" oninput="searchJobs()">
+  <!-- JOBS -->
+  <div id="jobs" class="page">
+    <div class="card">
+      <h2>Jobs</h2>
+      <p>Post jobs or apply easily.</p>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="chat" class="page">
+    <div class="card">
+      <h2>Chat</h2>
+      <p>People chat & AI chat UI can be added here.</p>
+    </div>
+  </div>
+
+  <!-- PROFILE (ADDED) -->
+  <div id="profile" class="page">
+
+    <div class="cover"></div>
+
+    <div class="card profile-card">
+      <div class="profile-top">
+        <div class="avatar"></div>
+        <div class="profile-info">
+          <h2>Santanu Konwar</h2>
+          <p>Frontend Developer • Job Platform Builder</p>
+          <p>India 🇮🇳</p>
+          <span class="badge">Open to Work</span>
+          <div class="actions">
+            <button class="primary">Connect</button>
+            <button>Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>About</h3>
+      <p>Building professional job hiring platforms with modern UI and smooth experience.</p>
+    </div>
+
+    <div class="card">
+      <h3>Skills</h3>
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">UI/UX</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Experience</h3>
+      <div class="exp">
+        <h4>Frontend Developer</h4>
+        <p class="muted">2024 – Present</p>
+        <p>LinkedIn-style job platform UI</p>
+      </div>
+    </div>
 
   </div>
 
-  <button onclick="logout()">Logout</button>
 </div>
+
 <script>
-
-/* SWITCH */
-function showSignup(){
-  loginBox.classList.add("hidden");
-  signupBox.classList.remove("hidden");
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
-
-function showLogin(){
-  signupBox.classList.add("hidden");
-  loginBox.classList.remove("hidden");
-}
-
-/* SIGNUP */
-function signup(){
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("signupEmail").value;
-  let pass = document.getElementById("signupPassword").value;
-  let lang = document.getElementById("language").value;
-  let type = document.getElementById("userType").value;
-
-  if(name==""||email==""||pass==""||lang==""||type==""){
-    alert("Fill all fields");
-    return;
-  }
-
-  let user = {
-    name:name,
-    email:email,
-    password:pass,
-    language:lang,
-    type:type
-  };
-
-  localStorage.setItem("user", JSON.stringify(user));
-  alert("Account Created!");
-  showLogin();
-}
-
-/* LOGIN */
-function login(){
-  let email = document.getElementById("loginEmail").value;
-  let pass = document.getElementById("loginPassword").value;
-
-  let savedUser = JSON.parse(localStorage.getItem("user"));
-
-  if(!savedUser){
-    alert("No account found!");
-    return;
-  }
-
-  if(email==savedUser.email && pass==savedUser.password){
-
-    loginBox.classList.add("hidden");
-    homeBox.classList.remove("hidden");
-
-    document.getElementById("userInfo").innerText =
-      "Welcome " + savedUser.name + 
-      " | " + savedUser.type;
-
-    if(savedUser.type=="Employer"){
-      employerPanel.classList.remove("hidden");
-    }else{
-      workerPanel.classList.remove("hidden");
-      loadJobs();
-    }
-
-  }else{
-    alert("Wrong credentials");
-  }
-
-
-  if(email==savedUser.email && pass==savedUser.password){
-    loginBox.classList.add("hidden");
-    homeBox.classList.remove("hidden");
-
-    document.getElementById("userInfo").innerText =
-      "Welcome " + savedUser.name +
-      " | " + savedUser.language +
-      " | " + savedUser.type;
-  }else{
-    alert("Wrong credentials");
-  }
-}
-
-/* LOGOUT */
-function logout(){
-  homeBox.classList.add("hidden");
-  loginBox.classList.remove("hidden");
-}
-/* POST JOB */
-function postJob(){
-  let title = jobTitle.value;
-  let location = jobLocation.value;
-  let salary = jobSalary.value;
-  let desc = jobDesc.value;
-
-  if(title=="" || location=="" || salary=="" || desc==""){
-    alert("Fill all fields");
-    return;
-  }
-
-  let job = {
-    title:title,
-    location:location,
-    salary:salary,
-    desc:desc
-  };
-
-  let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-  jobs.push(job);
-  localStorage.setItem("jobs", JSON.stringify(jobs));
-
-  alert("Job Posted!");
-
-  jobTitle.value="";
-  jobLocation.value="";
-  jobSalary.value="";
-  jobDesc.value="";
-}
-
-/* LOAD JOBS */
-function loadJobs(){
-  jobSearch.value = ""; // reset search
-  searchJobs();
-}
-
-function applyJob(index){
-  let jobs = JSON.parse(localStorage.getItem("jobs"));
-  let job = jobs[index];
-
-  let savedUser = JSON.parse(localStorage.getItem("user"));
-
-  let application = {
-    workerName: savedUser.name,
-    workerEmail: savedUser.email,
-    jobTitle: job.title
-  };
-
-  let applications = JSON.parse(localStorage.getItem("applications")) || [];
-  applications.push(application);
-  localStorage.setItem("applications", JSON.stringify(applications));
-
-  alert("Applied Successfully!");
-}
-function loadApplications(){
-  let apps = JSON.parse(localStorage.getItem("applications")) || [];
-  applicationList.innerHTML="";
-
-  apps.forEach(app=>{
-    applicationList.innerHTML += `
-      <div class="jobCard">
-        <p>Job: ${app.jobTitle}</p>
-        <p>Worker: ${app.workerName}</p>
-        <p>Email: ${app.workerEmail}</p>
-      </div>
-    `;
-  });
-}
-function searchJobs(){
-  let searchTerm = jobSearch.value.toLowerCase();
-  let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-
-  let filteredJobs = jobs.filter(job => 
-    job.title.toLowerCase().includes(searchTerm) ||
-    job.location.toLowerCase().includes(searchTerm)
-  );
-
-  jobList.innerHTML = "";
-
-  filteredJobs.forEach((job,index)=>{
-    jobList.innerHTML += `
-      <div class="jobCard">
-        <h4>${job.title}</h4>
-        <p>Location: ${job.location}</p>
-        <p>Salary: ${job.salary}</p>
-        <p>${job.desc}</p>
-        <button onclick="applyJob(${index})">Apply</button>
-      </div>
-    `;
-  });
-}
-
-
 </script>
 
 </body>
 </html>
+
